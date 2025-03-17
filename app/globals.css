@@ -1,0 +1,375 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tema renkleri */
+.theme-ramadan {
+  --primary: #ffd700;
+  --secondary: #8e44ad;
+  --accent: #2c3e50;
+  --background: #1a1a2e;
+  --glow: rgba(255, 215, 0, 0.3);
+  --particle-color: rgba(255, 215, 0, 0.8);
+}
+
+.theme-neon {
+  --primary: #00ff9d;
+  --secondary: #ff00ff;
+  --accent: #00ffff;
+  --background: #000000;
+  --glow: rgba(0, 255, 157, 0.3);
+  --particle-color: rgba(0, 255, 255, 0.8);
+}
+
+.theme-ocean {
+  --primary: #00bcd4;
+  --secondary: #3f51b5;
+  --accent: #2196f3;
+  --background: #0a192f;
+  --glow: rgba(33, 150, 243, 0.3);
+  --particle-color: rgba(0, 188, 212, 0.8);
+}
+
+.theme-sunset {
+  --primary: #ff9800;
+  --secondary: #f44336;
+  --accent: #ff5722;
+  --background: #1a0f0f;
+  --glow: rgba(255, 152, 0, 0.3);
+  --particle-color: rgba(244, 67, 54, 0.8);
+}
+
+.theme-forest {
+  --primary: #4caf50;
+  --secondary: #8bc34a;
+  --accent: #009688;
+  --background: #0f1a0f;
+  --glow: rgba(76, 175, 80, 0.3);
+  --particle-color: rgba(139, 195, 74, 0.8);
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(135deg, var(--accent) 0%, var(--background) 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Tema seçici */
+.theme-selector {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+}
+
+.theme-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+  opacity: 0.8;
+}
+
+.theme-button:hover {
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.theme-list {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.theme-list.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.theme-option {
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.theme-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.theme-option::before {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--primary), var(--secondary));
+}
+
+/* Parçacık animasyonu */
+@keyframes particleFall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.particle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background-color: var(--particle-color);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  pointer-events: none;
+  opacity: 0;
+  animation: particleFall 3s linear infinite;
+}
+
+/* Diğer animasyonlar */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--glow),
+                0 0 40px var(--glow),
+                0 0 60px var(--glow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--glow),
+                0 0 60px var(--glow),
+                0 0 90px var(--glow);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.element-glow {
+  box-shadow: 0 0 15px var(--glow),
+              0 0 30px var(--glow),
+              0 0 45px var(--glow);
+  animation: glow 3s ease-in-out infinite;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.hover-scale {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px var(--glow);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+
+.shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--primary) 0%,
+    #fff 20%,
+    var(--primary) 40%
+  );
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+
+.themed-card {
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px var(--glow);
+  transition: all 0.3s ease;
+}
+
+.themed-card:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 30px var(--glow);
+}
+
+.gradient-bg {
+  background: linear-gradient(
+    270deg,
+    var(--primary),
+    var(--secondary),
+    var(--accent),
+    var(--primary)
+  );
+  background-size: 300% 300%;
+  animation: shimmer 8s linear infinite;
+}
+
+/* Hilal ve yıldız animasyonu */
+@keyframes starfall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes crescentGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--crescent-glow),
+                0 0 40px var(--crescent-glow),
+                0 0 60px var(--crescent-glow);
+  }
+  50% {
+    box-shadow: 0 0 30px var(--crescent-glow),
+                0 0 60px var(--crescent-glow),
+                0 0 90px var(--crescent-glow);
+  }
+}
+
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.star {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background-color: var(--star-color);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  pointer-events: none;
+  opacity: 0;
+  animation: starfall 3s linear infinite;
+}
+
+.animate-pulse-scale {
+  animation: pulse-scale 2s ease-in-out infinite;
+}
+
+.gradient-shift {
+  background: linear-gradient(
+    270deg,
+    var(--ramadan-gold),
+    var(--ramadan-purple),
+    var(--ramadan-green),
+    var(--ramadan-gold)
+  );
+  background-size: 300% 300%;
+  animation: shimmer 8s linear infinite;
+}
+
+.ramadan-glow {
+  box-shadow: 0 0 15px var(--crescent-glow),
+              0 0 30px var(--crescent-glow),
+              0 0 45px var(--crescent-glow);
+  animation: crescentGlow 3s ease-in-out infinite;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--ramadan-gold), var(--ramadan-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+
+.ramadan-card {
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ramadan-card:hover {
+  border-color: rgba(255, 215, 0, 0.4);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+}
+
+.button-glow {
+  position: relative;
+  overflow: hidden;
+}
+
+.button-glow::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 
